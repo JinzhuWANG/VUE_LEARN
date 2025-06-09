@@ -1,51 +1,64 @@
 <html lang="en">
-<script type="importmap">
-  {
-    "imports": {
-      "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
-    }
-  }
-</script>
-<script type="module" src="index.js"></script>
-<link rel="stylesheet" href="index.css">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vue Learn</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue Learn</title>
+  <script type="importmap">
+      {
+        "imports": {
+          "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+        }
+      }
+    </script>
+  <script type="module" src="./index.js"></script>
+  <link rel="stylesheet" href="index.css">
+
 </head>
 
 <body>
-    <div id="app">
-        <div :class="msg_id">{{ msg }}</div>
+  <div id="app">
 
-        <button @click="increment">+</button>
-        <button @click="decrement">-</button>
-        <h1>Count is {{ count }}</h1>
-        <br>
+    <h1 :class="msg_cls">{{ msg }}</h1>
 
-        <input v-model="text">
-        <p>{{ text }}</p>
-        <br>
+    <h1>Count is {{ count }}</h1>
+    <button @click="increment">+</button>
+    <button @click="decrement">-</button>
+    <br><br><br><br>
 
-        <h1 v-if="awesome"> Vue is awesomee! </h1>
-        <h1 v-else="awesome"> Not Good</h1>
-        <button @click="toggleawesome"> Toggle Awesome</button>
-        <br><br>
+    <input v-model="text" id="text-input">
+    <p>{{ text }}</p>
+    <br>
 
-        <form @submit.prevent="addTodo">
-            <input v-model="newTodo" required placeholder="new todo">
-            <button>Add Todo</button>
-        </form>
+    <h1 v-if="awesome"> Vue is awesomee! </h1>
+    <h1 v-else="awesome"> Not Good</h1>
+    <button @click="toggleawesome"> Toggle Awesome</button>
+    <br><br>
 
-        <ul>
-            <li v-for="todo in todos" :key="todo.id">
-                {{ todo.text }}
-                <button @click="rmTodo(todo)">X</button>
-            </li>
-        </ul>
-    </div>
+    <form @submit.prevent="addTodo">
+      <input v-model="newTodo" required placeholder="new todo">
+      <button>Add Todo</button>
+    </form>
 
+    <ul>
+      <li v-for="todo in filteredTodos" :key="todo.id">
+        <input type="checkbox" v-model="todo.done">
+        <span :class="{done: todo.done}">{{ todo.text }}</span>
+        <button @click="rmTodo(todo)">X</button>
+      </li>
+    </ul>
+    <button @click="hideCompleted = !hideCompleted">
+      {{ hideCompleted ? 'Show Completed' : 'Hide Completed' }}
+    </button>
+    <br><br>
+
+    <p :class="msg_cls" ref="p_ref"> Nihao</p>
+
+
+  </div>
 </body>
+
+
+
 
 </html>

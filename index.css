@@ -1,3 +1,7 @@
-.msg {
+.title {
     color: red;
+}
+
+.done {
+    text-decoration: line-through;
 }

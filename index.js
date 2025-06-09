@@ -1,20 +1,24 @@
-import { createApp, ref } from 'vue'
+
+import { createApp, ref, computed, onMounted } from 'vue'
+
 
 createApp({
     setup() {
         let id = 0
 
         const msg = ref('Hello Vue!')
-        const msg_id = ref('msg')
+        const msg_cls = ref('title')
         const count = ref(0)
         const text = ref('')
         const awesome = ref(true)
         const todos = ref([
-            { id: id++, text: 'Learn HTML' },
-            { id: id++, text: 'Learn JavaScript' },
-            { id: id++, text: 'Learn Vue' }
+            { id: id++, text: 'Learn HTML', done: true },
+            { id: id++, text: 'Learn JavaScript', done: false },
+            { id: id++, text: 'Learn Vue', done: true }
         ])
         const newTodo = ref('')
+        const hideCompleted = ref(false)
+        const p_ref = ref(null)
 
 
         function increment() {
@@ -34,14 +38,28 @@ createApp({
             newTodo.value = ''
         }
 
+        const filteredTodos = computed(() => {
+            return hideCompleted.value
+                ? todos.value.filter((t) => !t.done)
+                : todos.value
+        })
+
+        onMounted(() => {
+            p_ref.value.textContent = "Hello"
+        })
+
         return {
             msg,
-            msg_id,
+            msg_cls,
             count,
             text,
             awesome,
             todos,
+            todos,
+            filteredTodos,
             newTodo,
+            hideCompleted,
+            p_ref,
             increment,
             decrement,
             toggleawesome,
