@@ -1,5 +1,5 @@
 
-import { createApp, ref, computed, onMounted } from 'vue'
+import { createApp, ref, computed, onMounted, watch } from 'vue'
 
 
 createApp({
@@ -19,6 +19,8 @@ createApp({
         const newTodo = ref('')
         const hideCompleted = ref(false)
         const p_ref = ref(null)
+        const todoID = ref(1)
+        const todoData = ref(null)
 
 
         function increment() {
@@ -44,6 +46,16 @@ createApp({
                 : todos.value
         })
 
+        async function fetchData() {
+            todoData = null
+            const res = await fetch(
+                `https://jsonplaceholder.typicode.com/todos/${todoID.value}`
+            )
+            todoData = await res.json()
+        }
+
+        fetchData()
+
         onMounted(() => {
             p_ref.value.textContent = "Hello"
         })
@@ -60,6 +72,8 @@ createApp({
             newTodo,
             hideCompleted,
             p_ref,
+            todoID,
+            todoData,
             increment,
             decrement,
             toggleawesome,
