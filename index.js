@@ -1,5 +1,5 @@
 
-import { createApp, ref, computed, onMounted, watch } from 'vue'
+const { createApp, ref, computed, onMounted, watch } = Vue
 
 
 createApp({
@@ -47,11 +47,11 @@ createApp({
         })
 
         async function fetchData() {
-            todoData = null
+            todoData.value = null
             const res = await fetch(
                 `https://jsonplaceholder.typicode.com/todos/${todoID.value}`
             )
-            todoData = await res.json()
+            todoData.value = await res.json()
         }
 
         fetchData()
