@@ -55,6 +55,7 @@ createApp({
         }
 
         fetchData()
+        watch(todoID, fetchData)
 
         onMounted(() => {
             p_ref.value.textContent = "Hello"
