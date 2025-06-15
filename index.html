@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vue Learn</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./ChildComp.js"></script>
     <link rel="stylesheet" href="index.css">
     <script src="./index.js" defer></script>
+
   </head>
 
   <body>
@@ -54,6 +56,13 @@
         <pre v-else>{{todoData}}</pre>
 
       </div>
+
+      <child-comp
+        :class="msg_cls"
+        :msg_comp="'Hello from Child Component!'"
+        @response="(msg) => child_msg = msg">
+      </child-comp>
+      <p> {{child_msg}} </p>
 
     </div>
 

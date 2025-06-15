@@ -2,7 +2,7 @@
 const { createApp, ref, computed, onMounted, watch } = Vue
 
 
-createApp({
+const app = createApp({
     setup() {
         let id = 0
 
@@ -21,6 +21,7 @@ createApp({
         const p_ref = ref(null)
         const todoID = ref(1)
         const todoData = ref(null)
+        const child_msg = ref('No child msg yet')
 
 
         function increment() {
@@ -75,6 +76,7 @@ createApp({
             p_ref,
             todoID,
             todoData,
+            child_msg,
             increment,
             decrement,
             toggleawesome,
@@ -82,4 +84,9 @@ createApp({
             addTodo
         }
     }
-}).mount('#app')
+})
+
+// Register the globally loaded ChildComp
+app.component('child-comp', window.ChildComp)
+
+app.mount('#app')
